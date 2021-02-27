@@ -42,7 +42,13 @@ namespace Desafio
 
 
             services.AddSwaggerGen();
-            services.AddSwaggerDocument();
+            services.AddSwaggerDocument( config =>
+               config.PostProcess = document =>
+                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "Desafio API";                                      
+                }
+            );
             
         }
 
