@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Desafio.Repositorio
 {
-    public class ContaRepository
+    public class ContaRepositorio : IContaRepositorio
     {
-        //Omar o motivo para usar readolu
+       
         private readonly DbSet<Conta> _entity;
         private readonly ApplicationContext _context;
 
-        public ContaRepository(ApplicationContext applicationContext)
+        public ContaRepositorio(ApplicationContext applicationContext)
         {
             _context = applicationContext;
             _entity = applicationContext.Set<Conta>();

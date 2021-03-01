@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Desafio.Model.Validators
 {
-    public class ContaModelValidator:AbstractValidator<ContaModel>
+    public class ContaModelValidator:AbstractValidator<PostContaModel>
     {
         public ContaModelValidator()
         {
@@ -15,8 +15,7 @@ namespace Desafio.Model.Validators
             this.
             RuleFor(m => m.Nome).NotEmpty().WithMessage(messageFieldEmpty);
             RuleFor(m => m.DataPagamento).NotEmpty().WithMessage(messageFieldEmpty);
-            RuleFor(m => m.DataVencimento).NotEmpty().WithMessage(messageFieldEmpty);
-            RuleFor(m => m.QuantidadeDiasAtraso).NotNull().WithMessage(messageFieldEmpty);
+            RuleFor(m => m.DataVencimento).NotEmpty().WithMessage(messageFieldEmpty);           
             RuleFor(m => m.ValorOriginal).NotNull().WithMessage(messageFieldEmpty);
 
 

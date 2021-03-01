@@ -24,8 +24,9 @@ namespace Desafio.Dados
                 p.Property(p => p.Nome).IsRequired();
                 p.Property(p => p.QuantidadeDiasAtraso).IsRequired();
                 p.Property(p => p.ValorOriginal).IsRequired();
+                p.Property(p => p.ValorCorrigido).IsRequired();
                 p.Property(p => p.DataVencimento).IsRequired();
-                p.Property(p => p.DataPagamento).IsRequired();
+                p.Property(p => p.DataPagamento).IsRequired();                
             });
         }
     }

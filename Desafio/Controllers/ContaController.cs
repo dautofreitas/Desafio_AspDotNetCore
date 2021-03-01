@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Desafio.Entidade;
+using Desafio.Model;
+using Desafio.Negocio;
 using Desafio.Repositorio;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,17 +17,17 @@ namespace Desafio.Controllers
     public class ContaController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private ContaRepository _contaRepository;
-        public ContaController(ContaRepository contaRepository, IMapper mapper)
+        private IContaNegocio _contaNegocio;
+        public ContaController(IContaNegocio contaNegocio, IMapper mapper)
         {
-            _contaRepository = contaRepository;
+            _contaNegocio = contaNegocio;
             _mapper = mapper;
         }      
 
         [HttpGet]        
-        public IActionResult GetAll()
+        public ActionResult<IEnumerable<GetContaModel>> GetAll()
         {
-            var contas = _mapper.Map<IEnumerable<Conta>, IEnumerable<ContaModel>>(_contaRepository.GetAll());
+            var contas = _mapper.Map<IEnumerable<Conta>, IEnumerable<GetContaModel>>(_contaNegocio.RetornaTodasContas());
 
             if (contas.Count() == 0)
             {
@@ -36,11 +38,11 @@ namespace Desafio.Controllers
 
         }
         [HttpPost]
-        public IActionResult Isert(ContaModel contaModel)
+        public IActionResult Isert(PostContaModel contaModel)
         {
             
             Conta conta = _mapper.Map<Conta>(contaModel);
-            _contaRepository.Isert(conta);
+            _contaNegocio.CriarConta(conta);
             return Ok();
 
         }

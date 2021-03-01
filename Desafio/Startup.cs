@@ -15,6 +15,7 @@ using Desafio.Dados;
 using Desafio.Repositorio;
 using FluentValidation.AspNetCore;
 using Desafio.Filters;
+using Desafio.Negocio;
 
 namespace Desafio
 {
@@ -32,24 +33,33 @@ namespace Desafio
         {
 
             services.AddDbContext<ApplicationContext>();
-            services.AddScoped<ContaRepository, ContaRepository>();
+
+            RegistraDI(services);
+
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllers()            
-                .AddFluentValidation(options => {
+            services.AddControllers()
+                .AddFluentValidation(options =>
+                {
                     options.RegisterValidatorsFromAssemblyContaining<Startup>();
                     options.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 });
 
 
             services.AddSwaggerGen();
-            services.AddSwaggerDocument( config =>
+            services.AddSwaggerDocument(config =>
                config.PostProcess = document =>
-                {
-                    document.Info.Version = "v1";
-                    document.Info.Title = "Desafio API";                                      
-                }
+               {
+                   document.Info.Version = "v1";
+                   document.Info.Title = "Desafio API";
+               }
             );
-            
+
+        }
+
+        private static void RegistraDI(IServiceCollection services)
+        {
+            services.AddScoped<IContaRepositorio, ContaRepositorio>();
+            services.AddScoped<IContaNegocio, ContaNegocio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,8 +12,11 @@ namespace Desafio.Entidade
         public int? Id { get; set; }
         public string Nome { get; set; }
         public decimal ValorOriginal { get; set; }
+        public decimal ValorCorrigido { get; set; }
         public int QuantidadeDiasAtraso { get; set; }
         public DateTime DataVencimento { get; set; }
         public DateTime DataPagamento { get; set; }
+        public decimal? PorcentagemMulta { get; set; }
+        public decimal? PorcentagemJurosDia { get; set; }
     }
 }
