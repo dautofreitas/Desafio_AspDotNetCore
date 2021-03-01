@@ -36,11 +36,22 @@ namespace Desafio.Negocio
             return conta;
         }
 
-        private static Conta CalculaValorCorrigido(Conta conta)
+        private Conta CalculaValorCorrigido(Conta conta)
         {
             if (conta.QuantidadeDiasAtraso < 1)
                 return conta;
 
+           conta  = CalculaJurosEMulta(conta);
+
+            conta.ValorCorrigido = conta.ValorOriginal;
+            conta.ValorCorrigido += Convert.ToDecimal(conta.ValorOriginal * (conta.PorcentagemMulta / 100));
+            conta.ValorCorrigido += Convert.ToDecimal((conta.ValorOriginal * (conta.PorcentagemJurosDia / 100)) * conta.QuantidadeDiasAtraso);
+
+            return conta;
+        }
+
+        private Conta CalculaJurosEMulta(Conta conta)
+        {
             switch (conta.QuantidadeDiasAtraso)
             {
                 case int dqDias when dqDias <= 3:
@@ -48,7 +59,7 @@ namespace Desafio.Negocio
                     conta.PorcentagemJurosDia = 0.1m;
                     break;
 
-                case int dqDias when dqDias > 3 && dqDias < 6:
+                case int dqDias when dqDias < 6:
                     conta.PorcentagemMulta = 3;
                     conta.PorcentagemJurosDia = 0.2m;
                     break;
@@ -58,10 +69,6 @@ namespace Desafio.Negocio
                     conta.PorcentagemJurosDia = 0.3m;
                     break;
             }
-
-            conta.ValorCorrigido = conta.ValorOriginal;
-            conta.ValorCorrigido += Convert.ToDecimal(conta.ValorOriginal * (conta.PorcentagemMulta/100));
-            conta.ValorCorrigido += Convert.ToDecimal((conta.ValorOriginal * (conta.PorcentagemJurosDia/100))* conta.QuantidadeDiasAtraso);
 
             return conta;
         }
