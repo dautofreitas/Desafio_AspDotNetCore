@@ -7,26 +7,17 @@ using System.Threading.Tasks;
 
 namespace Desafio.Filters
 {
-    public class ValidationFilter : IAuthorizationFilter
+    public class ValidationFilter : IResultFilter
     {
-
-       
-        public void OnActionExecuting(ActionExecutingContext context)
-        {
-          
-        }
-
-        public void OnActionExecuted(ActionExecutedContext context)
+        
+        public void OnResultExecuted(ResultExecutedContext context)
         {
             
         }
 
-        public void OnAuthorization(AuthorizationFilterContext context)
+        public void OnResultExecuting(ResultExecutingContext context)
         {
-            if (!context.ModelState.IsValid)
-            {
-                context.Result = new BadRequestObjectResult(context.ModelState);
-            }
+            
         }
     }
 }

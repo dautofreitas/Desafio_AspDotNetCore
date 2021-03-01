@@ -10,13 +10,7 @@ namespace Desafio.Dados
 
     public class ApplicationContext: DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-PITKUMS\SQLEXPRESS;Initial Catalog=Desafio;Integrated Security=True");
-
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+       protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Conta>( p => 
             {
@@ -26,7 +20,7 @@ namespace Desafio.Dados
                 p.Property(p => p.ValorOriginal).IsRequired();
                 p.Property(p => p.ValorCorrigido).IsRequired();
                 p.Property(p => p.DataVencimento).IsRequired();
-                p.Property(p => p.DataPagamento).IsRequired();                
+                p.Property(p => p.DataPagamento).IsRequired();              
             });
         }
     }

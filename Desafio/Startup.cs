@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -37,15 +36,13 @@ namespace Desafio
             RegistraDI(services);
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllers()
+            services.AddControllers(op => op.Filters.Add(new ValidationFilter()))
                 .AddFluentValidation(options =>
                 {
                     options.RegisterValidatorsFromAssemblyContaining<Startup>();
                     options.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 });
 
-
-            services.AddSwaggerGen();
             services.AddSwaggerDocument(config =>
                config.PostProcess = document =>
                {
