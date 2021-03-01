@@ -32,8 +32,8 @@ namespace Desafio
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<ApplicationContext>(options =>
-       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationContext>(options =>  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             RegistraDI(services);
 
             services.AddAutoMapper(typeof(Startup));

@@ -1,16 +1,17 @@
 ﻿using Desafio.Entidade;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Desafio.Dados
 {
 
     public class ApplicationContext: DbContext
     {
-       protected override void OnModelCreating(ModelBuilder modelBuilder)
+      
+       public ApplicationContext(DbContextOptions options)
+            : base(options)
+        {
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Conta>( p => 
             {
@@ -20,7 +21,7 @@ namespace Desafio.Dados
                 p.Property(p => p.ValorOriginal).IsRequired();
                 p.Property(p => p.ValorCorrigido).IsRequired();
                 p.Property(p => p.DataVencimento).IsRequired();
-                p.Property(p => p.DataPagamento).IsRequired();              
+                p.Property(p => p.DataPagamento).IsRequired();                
             });
         }
     }
