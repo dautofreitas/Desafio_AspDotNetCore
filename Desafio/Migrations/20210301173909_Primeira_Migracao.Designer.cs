@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Desafio.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210228165235_TerceiraMigracao")]
-    partial class TerceiraMigracao
+    [Migration("20210301173909_Primeira_Migracao")]
+    partial class Primeira_Migracao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,18 +39,22 @@ namespace Desafio.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("PorcentagemJurosDia")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal?>("PorcentagemMulta")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("QuantidadeDiasAtraso")
                         .HasColumnType("int");
 
                     b.Property<decimal>("ValorCorrigido")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ValorOriginal")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");

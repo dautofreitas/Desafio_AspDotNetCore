@@ -37,18 +37,22 @@ namespace Desafio.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("PorcentagemJurosDia")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal?>("PorcentagemMulta")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("QuantidadeDiasAtraso")
                         .HasColumnType("int");
 
                     b.Property<decimal>("ValorCorrigido")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ValorOriginal")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
